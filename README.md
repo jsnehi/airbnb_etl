@@ -4,9 +4,9 @@ This project implements a scalable ETL (Extract, Transform, Load) pipeline using
 # Prerequisites
 Ensure you have the following installed and set up before running the project:
 
-PostgreSQL database (local or cloud instance)
-Python environment with necessary libraries (pandas, sqlalchemy, metaflow)
-GitHub account for code repository
+- PostgreSQL database (local or cloud instance)
+- Python environment with necessary libraries (pandas, sqlalchemy, metaflow)
+- GitHub account for code repository
 # Project Structure
 ```sh
 etl_pipeline/
@@ -25,47 +25,45 @@ etl_pipeline/
 ```
 # Setup Instructions
 1. Database Setup:
-
-- Install PostgreSQL and create a database (airbnb_nyc_db).
-- Configure access credentials in scripts and Metaflow configuration.
+    - Install PostgreSQL and create a database (airbnb_nyc_db).
+    - Configure access credentials in scripts and Metaflow configuration.
 
 2. Python Environment:
+    - Create a virtual environment (recommended) and install dependencies:
 
-- Create a virtual environment (recommended) and install dependencies:
 ```sh
 pip install -r requirements.txt
 ```
 3. Metaflow Configuration:
+    - Modify metaflow_config.py to set your Metaflow datastore and backend configuration.
 
-- Modify metaflow_config.py to set your Metaflow datastore and backend configuration.
 # Running the ETL Pipeline
 # Data Loading and Transformation
 1. Load Data (01_load_data.py):
-
-- Run this script to load the Airbnb NYC dataset (nyc_airbnb_data.csv) into your PostgreSQL database.
+    - Run this script to load the Airbnb NYC dataset (nyc_airbnb_data.csv) into your PostgreSQL database.
 2. Transform Data (02_transform_data.py):
+    - Execute this script to perform data transformations such as normalization, metric calculation, and handling missing values.
 
-- Execute this script to perform data transformations such as normalization, metric calculation, and handling missing values.
 # Workflow Management with Metaflow
 1. Metaflow Workflow (etl_flow.py):
-- Use Metaflow to manage the end-to-end ETL process.
-- Customize workflow steps as needed in etl_flow.py.
+    - Use Metaflow to manage the end-to-end ETL process.
+    - Customize workflow steps as needed in etl_flow.py.
+
 # Example Commands
 - To load data into PostgreSQL:
+    ```sh
+    python scripts/01_load_data.py
+    ```
 
-```sh
-python scripts/01_load_data.py
-```
 - To transform data:
+    ```sh
+    python scripts/02_transform_data.py
+    ```
 
-```sh
-python scripts/02_transform_data.py
-```
 - To run Metaflow workflow:
-
-```sh
-python scripts/etl_flow.py run
-```
+    ```sh
+    python scripts/etl_flow.py run
+    ```
 # Repository Organization
 - **scripts/**: Contains Python scripts for data loading, transformation, Metaflow workflow, and configuration.
 - **data/**: Holds the Airbnb NYC dataset (nyc_airbnb_data.csv).
@@ -102,7 +100,7 @@ This project implements a scalable ETL pipeline for the Airbnb New York City dat
 ## Setup
 1. Clone the repository:
     ```sh
-    git clone 
+    git clone https://github.com/jsnehi/airbnb_etl.git
     cd airbnb_etl
     ```
 
@@ -131,6 +129,4 @@ This project implements a scalable ETL pipeline for the Airbnb New York City dat
 ## Documentation
 Detailed explanation of the ETL process and data transformations is provided in the code comments.
 
-## Demonstration
-[Link to the demonstration video or screenshots]
 
