@@ -1,27 +1,22 @@
-# etl_flow.py
-
+import os
 from metaflow import FlowSpec, step #, Parameter
 from sqlalchemy import create_engine
 import pandas as pd
-# configure(plugins={'kubernetes': False})
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class ETLFlow(FlowSpec):
     def __init__(self):
         # Define PostgreSQL connection parameters
-        self.db_username = 'postgres'
-        self.db_password = 'admin'
-        self.db_host = 'localhost'
-        self.db_port = '5433'
-        self.db_name = 'airbnb_db'
+        self.db_username = os.getenv("USERNAME")
+        self.db_password = os.getenv("PASSWORD")
+        self.db_host = os.getenv("HOST")
+        self.db_port = os.getenv("PORT")
+        self.db_name = os.getenv("DB_NAME")
 
     @step
     def start(self):
-        # self.db_username = Parameter('db_username', help='Username for PostgreSQL')
-        # self.db_password = Parameter('db_password', help='Password for PostgreSQL')
-        # self.db_host = Parameter('db_host', help='Host for PostgreSQL')
-        # self.db_port = Parameter('db_port', help='Port for PostgreSQL')
-        # self.db_name = Parameter('db_name', help='Database name')
-
         self.next(self.load_data)
 
     @step
@@ -41,7 +36,7 @@ class ETLFlow(FlowSpec):
         df['date'] = pd.to_datetime(df['date'])
         df['time'] = df['date'].dt.time
 
-        # Example: Calculate average price per neighborhood
+        #Calculate average price per neighborhood
         avg_price_per_neighborhood = df.groupby('neighborhood')['price'].mean().reset_index()
 
         avg_price_per_neighborhood.to_sql('avg_price_per_neighborhood', engine, if_exists='replace', index=False)
